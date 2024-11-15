@@ -19,6 +19,6 @@
 	}
 
 	handle {
-		respond "Access denied" 403
+		respond "Access denied {$ALLOWED_IP}" 403
 	}
 }
