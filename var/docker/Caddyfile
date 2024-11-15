@@ -1,7 +1,6 @@
 :5000 {
 	@allowed_ip {
-		# header X-Forwarded-For {$ALLOWED_IP}
-		expression {{"{http.request.header.X-Forwarded-For}" == "{$ALLOWED_IP}"}}
+		expression `{http.request.header["X-Forwarded-For"]} == "{$ALLOWED_IP}"`
 	}
 
 	handle @allowed_ip {
@@ -20,7 +19,6 @@
 	}
 
 	handle {
-		# respond "Access denied. Allowed IP: {$ALLOWED_IP}. Your IP is {http.request.remote.host} or {http.request.header.X-Forwarded-For}" 403
 		respond "Access denied." 403
 	}
 }
