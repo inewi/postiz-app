@@ -1,24 +1,24 @@
 :5000 {
-    @allowed_ip {
-        remote_ip {env.ALLOWED_IP}
-    }
+	@allowed_ip {
+		remote_ip {env.ALLOWED_IP}
+	}
 
-    handle @allowed_ip {
-        handle_path /api/* {
-            reverse_proxy localhost:3000
-        }
+	handle @allowed_ip {
+		handle_path /api/* {
+			reverse_proxy localhost:3000
+		}
 
-        handle_path /uploads/* {
-            root * /uploads/
-            file_server
-        }
+		handle_path /uploads/* {
+			root * /uploads/
+			file_server
+		}
 
-        handle {
-            reverse_proxy localhost:4200
-        }
-    }
+		handle {
+			reverse_proxy localhost:4200
+		}
+	}
 
-    handle {
-        respond "Access denied" 403
-    }
+	handle {
+		respond "Access denied" 403
+	}
 }
