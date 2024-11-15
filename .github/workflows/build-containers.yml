@@ -77,7 +77,6 @@ jobs:
         run: |
           docker manifest create \
             ghcr.io/inewi/postiz-app:latest \
-            ghcr.io/inewi/postiz-app:amd64-${{ env.CONTAINERVER }} \
-            ghcr.io/inewi/postiz-app:arm64-${{ env.CONTAINERVER }}
+            ghcr.io/inewi/postiz-app:amd64-${{ env.CONTAINERVER }}
 
           docker manifest push ghcr.io/inewi/postiz-app:latest
