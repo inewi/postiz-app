@@ -19,6 +19,6 @@
 	}
 
 	handle {
-		respond "Access denied {$ALLOWED_IP}" 403
+		respond "Access denied. Allowed IP: {$ALLOWED_IP}. Your IP is {http.request.remote} or {remote_ip}" 403
 	}
 }
