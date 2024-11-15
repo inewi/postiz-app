@@ -1,6 +1,6 @@
 :5000 {
 	@allowed_ip {
-		remote_ip {env.ALLOWED_IP}
+		remote_ip {$ALLOWED_IP}
 	}
 
 	handle @allowed_ip {

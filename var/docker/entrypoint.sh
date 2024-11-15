@@ -24,6 +24,8 @@ mkdir -p /etc/supervisor.d/
 
 if [[ "$INTERNAL_PROXY_ENABLED" != "false" ]]; then
 	echo "Entrypoint: Starting internal proxy"
+	echo "ALLOWED IP: ${ALLOWED_IP}"
+
 	cp -vf /app/supervisord_available_configs/caddy.conf /etc/supervisor.d/
 fi
 
