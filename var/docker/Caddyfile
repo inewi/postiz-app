@@ -17,6 +17,6 @@
 	}
 
 	handle {
-		respond `Access denied. {http.request.header['X-Forwarded-For']} - '{http.request.header.X-Forwarded-For}' - '{$ALLOWED_IP}' - {'{http.request.header.X-Forwarded-For}' == '{$ALLOWED_IP}'}` 403
+		respond `Access denied. {http.request.header['X-Forwarded-For']} - '{http.request.header.X-Forwarded-For}' - '{$ALLOWED_IP}' - {@allowed_ip}` 403
 	}
 }
