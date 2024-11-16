@@ -1,5 +1,8 @@
 :5000 {
-	@allowed_ip `'{http.request.header.X-Forwarded-For}' == '{$ALLOWED_IP}'`
+	@allowed_ip {
+		# expression `'{http.request.header.X-Forwarded-For}' == '{$ALLOWED_IP}'`
+		header X-Forwarded-For {ALLOWED_IP}
+	}
 
 	handle @allowed_ip {
 		handle_path /api/* {
