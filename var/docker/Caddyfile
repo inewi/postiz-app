@@ -1,5 +1,5 @@
 :5000 {
-	@allowed_ip `'http.request.header["X-Forwarded-For"]' == '${ALLOWED_IP}'`
+	@allowed_ip `'{http.request.header["X-Forwarded-For"]}' == '${ALLOWED_IP}'`
 
 	handle @allowed_ip {
 		handle_path /api/* {
@@ -17,6 +17,6 @@
 	}
 
 	handle {
-		respond "Access denied." 403
+		respond "Access denied. {http.request.header['X-Forwarded-For']} ${ALLOWED_IP}" 403
 	}
 }
