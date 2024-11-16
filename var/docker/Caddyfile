@@ -1,6 +1,6 @@
 :5000 {
 	@allowed_ip {
-		expression `{http.request.header['X-Forwarded-For']} == '{$ALLOWED_IP}'`
+		expression `{http.request.header['X-Forwarded-For'][0]} == {$ALLOWED_IP}`
 	}
 
 	handle @allowed_ip {
