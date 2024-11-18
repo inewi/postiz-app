@@ -1,25 +1,39 @@
-:5000 {
-	@allowed_ip {
-		# expression `'{http.request.header.X-Forwarded-For}' == '{$ALLOWED_IP}'`
-		header X-Forwarded-For {ALLOWED_IP}
-	}
-
-	handle @allowed_ip {
-		handle_path /api/* {
-			reverse_proxy localhost:3000
-		}
-
-		handle_path /uploads/* {
-			root * /uploads/
-			file_server
-		}
-
-		handle {
-			reverse_proxy localhost:4200
-		}
-	}
-
-	handle {
-		respond `Access denied. {http.request.header['X-Forwarded-For']} - '{http.request.header.X-Forwarded-For}' - '{$ALLOWED_IP}' - {@allowed_ip}` 403
+{
+	# Global options
+	log {
+		output stdout # Send logs to the standard output (console)
+		format console # Use a console-friendly format
 	}
 }
+
+:5000 {
+	# Configure logging for this specific site block
+	log {
+		output stdout
+		format console
+	}
+
+	# Set up IP restriction using a matcher at the server block level
+	@allowed_ip header X-Forwarded-For {ALLOWED_IP}
+
+	# Use routing for handling requests
+	route {
+		handle @allowed_ip {
+			# Handle requests from allowed IPs
+			handle_path /api/* {
+				reverse_proxy localhost:3000
+			}
+
+			handle_path /uploads/* {
+				root * /uploads/
+				file_server
+			}
+			handle {
+				reverse_proxy localhost:4200
+			}
+		}
+		# Handle requests not matching the allowed IP
+		handle {
+			respond "Access denied. {http.request.header['X-Forwarded-For']}" 403
+		}
+	}
