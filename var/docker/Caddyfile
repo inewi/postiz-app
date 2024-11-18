@@ -3,10 +3,10 @@
 	persist_config off # storage isn't persistent anyway
 	auto_https off # railway handles https for us, this could in some cases cause issues if left enabled
 	# runtime logs
-	log {
-		output stdout
-		format json # set runtime log format to json mode 
-	}
+	# log {
+	# 	output stdout
+	# 	format json # set runtime log format to json mode 
+	# }
 	# server options
 	servers {
 		trusted_proxies static private_ranges # trust railway's proxy
@@ -42,6 +42,6 @@
 
 		# Handle requests not matching the allowed IP
 		handle {
-			respond "Access denied. {http.request.header.X-Real-Ip[0]}" 403
+			respond "Access denied. Your IP: {http.request.header.X-Real-Ip}." 403
 		}
 	}
