@@ -21,7 +21,7 @@
 	}
 
 	# Set up IP restriction using a matcher at the server block level
-	@allowed_ip expression `{http.request.header.X-Real-Ip}[0] == '{$ALLOWED_IP}'`
+	@allowed_ip expression `{http.request.header.X-Real-Ip} == '{$ALLOWED_IP}'`
 
 	# Use routing for handling requests
 	route {
