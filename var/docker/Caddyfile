@@ -15,10 +15,10 @@
 
 :5000 {
 	# Configure logging for this specific site block
-	log {
-		output stdout
-		format console
-	}
+	# log {
+	# 	output stdout
+	# 	format console
+	# }
 
 	# Set up IP restriction using a matcher at the server block level
 	@allowed_ip expression `{http.request.header.X-Real-Ip} == '{$ALLOWED_IP}'`
