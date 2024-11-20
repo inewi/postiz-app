@@ -26,18 +26,19 @@
 	# Use routing for handling requests
 	route {
 		handle @allowed_ip {
-			# Handle requests from allowed IPs
-			handle_path /api/* {
-				reverse_proxy localhost:3000
-			}
-
-			handle_path /uploads/* {
-				root * /uploads/
-				file_server
-			}
 			handle {
 				reverse_proxy localhost:4200
 			}
+		}
+
+		handle_path /uploads/* {
+			root * /uploads/
+			file_server
+		}
+
+		# Handle requests from allowed IPs
+		handle_path /api/* {
+			reverse_proxy localhost:3000
 		}
 
 		# Handle requests not matching the allowed IP
